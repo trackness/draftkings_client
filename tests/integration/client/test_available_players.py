@@ -1,5 +1,4 @@
 import datetime
-import os
 from unittest import TestCase, skip
 from unittest.mock import patch, Mock
 
@@ -7,7 +6,7 @@ from draft_kings import Client
 from draft_kings.http_client import HTTPClient
 from draft_kings.output.objects.players import PlayerDetails, DraftDetails, PositionDetails, \
     PlayerTeamSeriesDetails, TeamSeriesDetails, ExceptionalMessageDetails, ExceptionalMessageTypeDetails
-from tests.config import ROOT_DIRECTORY
+from tests.config import load_fixture
 
 
 @skip(reason="draftkings seems to deprecate draft groups after a couple weeks")
@@ -81,10 +80,7 @@ class TestNBAAvailablePlayers(TestCase):
 
 class TestPlayersWithExceptionalMessages(TestCase):
     def setUp(self) -> None:
-        with open(
-                os.path.join(ROOT_DIRECTORY, "tests/files/available_players/41793.json"),
-                encoding="utf-8"
-        ) as data_file:
+        with load_fixture('available_players/41793.json') as data_file:
             self.response_data = data_file.read()
             patched_method = patch.object(HTTPClient, "available_players")
             mocked_method = patched_method.start()

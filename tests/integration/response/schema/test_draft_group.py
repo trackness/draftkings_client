@@ -1,20 +1,14 @@
-import os
 from datetime import datetime, timezone
 from unittest import TestCase
 
-from draft_kings.response.objects.draft_group import League, Game
-from draft_kings.response.schema.draft_group import DraftGroupResponseSchema
-from tests.config import ROOT_DIRECTORY
+from draft_kings.response.objects.draft_group import League, Game, DraftGroupResponse
+from tests.config import load_fixture
 
 
 class TestUpcomingGolfDraftGroup(TestCase):
     def setUp(self) -> None:
-        with open(os.path.join(ROOT_DIRECTORY,
-                               'tests/files/draft_group_details/26545_upcoming.json'),
-                  encoding="utf-8"
-                  ) as data_file:
-            self.schema = DraftGroupResponseSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('draft_group_details/26545_upcoming.json') as data_file:
+            self.data = DraftGroupResponse.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)
@@ -72,12 +66,8 @@ class TestUpcomingGolfDraftGroup(TestCase):
 
 class TestHistoricalGolfDraftGroup(TestCase):
     def setUp(self) -> None:
-        with open(os.path.join(ROOT_DIRECTORY,
-                               'tests/files/draft_group_details/26545_historical.json'),
-                  encoding="utf-8") as \
-                data_file:
-            self.schema = DraftGroupResponseSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('draft_group_details/26545_historical.json') as data_file:
+            self.data = DraftGroupResponse.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)
@@ -135,12 +125,8 @@ class TestHistoricalGolfDraftGroup(TestCase):
 
 class TestUpcomingNFLDraftGroup(TestCase):
     def setUp(self) -> None:
-        with open(os.path.join(ROOT_DIRECTORY,
-                               'tests/files/draft_group_details/41409_upcoming.json'),
-                  encoding="utf-8") as \
-                data_file:
-            self.schema = DraftGroupResponseSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('draft_group_details/41409_upcoming.json') as data_file:
+            self.data = DraftGroupResponse.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)
@@ -198,12 +184,8 @@ class TestUpcomingNFLDraftGroup(TestCase):
 
 class TestHistoricalNFLDraftGroup(TestCase):
     def setUp(self) -> None:
-        with open(os.path.join(ROOT_DIRECTORY,
-                               'tests/files/draft_group_details/41409_historical.json'),
-                  encoding="utf-8") \
-                as data_file:
-            self.schema = DraftGroupResponseSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('draft_group_details/41409_historical.json') as data_file:
+            self.data = DraftGroupResponse.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)

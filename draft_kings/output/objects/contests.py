@@ -4,10 +4,17 @@ from typing import Optional, List
 
 from draft_kings.data import Sport
 
+from dataclasses import dataclass, field
+
+from desert import metadata, schema
+from draft_kings.output.objects.players import PlayerDetails
+from marshmallow import EXCLUDE
+from marshmallow.fields import Float, Str, Int
+
 
 @dataclass(frozen=True)
 class DraftGroupDetails:
-    contest_type_id: Optional[int]
+    contest_type_id: Optional[int] = field(metadata=metadata(Int(data_key="player_id")))
     draft_group_id: Optional[int]
     games_count: Optional[int]
     series_id: Optional[int]

@@ -1,21 +1,15 @@
-import os
 from datetime import datetime, timezone
 from unittest import TestCase
 
-from draft_kings.response.objects.draftables import Competition, Player, PlayerCompetitionDetails, \
-    CompetitionWeather, CompetitionTeam, DraftAlert
-from draft_kings.response.schema.draftables import DraftablesSchema, PlayerSchema
-from tests.config import ROOT_DIRECTORY
+from draft_kings.response.objects.draftables import Competition, Player, PlayerCompetitionDetails, CompetitionWeather, \
+    CompetitionTeam, DraftAlert, Draftables
+from tests.config import load_fixture
 
 
 class TestUpcomingNFLDraftables(TestCase):
     def setUp(self) -> None:
-        with open(
-                os.path.join(ROOT_DIRECTORY, 'tests/files/draftables/41793/upcoming.json'),
-                encoding="utf-8"
-        ) as data_file:
-            self.schema = DraftablesSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('draftables/41793/upcoming.json') as data_file:
+            self.data = Draftables.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)
@@ -137,12 +131,8 @@ class TestUpcomingNFLDraftables(TestCase):
 
 class TestHistoricalGolfDraftables(TestCase):
     def setUp(self) -> None:
-        with open(
-                os.path.join(ROOT_DIRECTORY, 'tests/files/draftables/historical_golf_draftables.json'),
-                encoding="utf-8"
-        ) as data_file:
-            self.schema = DraftablesSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('draftables/historical_golf_draftables.json') as data_file:
+            self.data = Draftables.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)
@@ -150,12 +140,8 @@ class TestHistoricalGolfDraftables(TestCase):
 
 class TestHistoricalDraftablesForDraftGroup11513(TestCase):
     def setUp(self) -> None:
-        with open(
-                os.path.join(ROOT_DIRECTORY, 'tests/files/draftables/11513.json'),
-                encoding="utf-8"
-        ) as data_file:
-            self.schema = DraftablesSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('draftables/11513.json') as data_file:
+            self.data = Draftables.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)
@@ -323,12 +309,8 @@ class TestHistoricalDraftablesForDraftGroup11513(TestCase):
 
 class TestPostponedPlayer(TestCase):
     def setUp(self) -> None:
-        with open(
-                os.path.join(ROOT_DIRECTORY, 'tests/files/draftables/postponed_player.json'),
-                encoding="utf-8"
-        ) as data_file:
-            self.schema = PlayerSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('draftables/postponed_player.json') as data_file:
+            self.data = Player.loads(data_file.read())
 
     def test_draft_alerts(self):
         self.assertListEqual(

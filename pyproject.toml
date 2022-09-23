@@ -27,6 +27,7 @@ python = "^3.7"
 requests = "^2.20.0"
 marshmallow = "^3.9.1"
 marshmallow-enum = "^1.5.1"
+desert = "^2022.9.22"
 
 [tool.poetry.dev-dependencies]
 coverage = "^5.3"

@@ -1,16 +1,13 @@
-import os
 from unittest import TestCase
 
 from draft_kings.response.objects.countries import Country, Countries
-from draft_kings.response.schema.countries import CountriesSchema
-from tests.config import ROOT_DIRECTORY
+from tests.config import load_fixture
 
 
 class TestCountries(TestCase):
     def setUp(self) -> None:
-        with open(os.path.join(ROOT_DIRECTORY, 'tests/files/countries.json'), encoding="utf-8") as data_file:
-            self.schema = CountriesSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('countries.json') as data_file:
+            self.data = Countries.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)

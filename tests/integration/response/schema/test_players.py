@@ -1,19 +1,14 @@
-import os
 from unittest import TestCase
 
-from draft_kings.response.objects.players import TeamSeries, Player, ExceptionalMessage, ExceptionalMessageType
-from draft_kings.response.schema.players import PlayersDetailsSchema
-from tests.config import ROOT_DIRECTORY
+from draft_kings.response.objects.players import TeamSeries, Player, ExceptionalMessage, ExceptionalMessageType, \
+    PlayersDetails
+from tests.config import load_fixture
 
 
 class TestSoccerPlayers(TestCase):
     def setUp(self) -> None:
-        with open(
-                os.path.join(ROOT_DIRECTORY, 'tests/files/available_players/22831.json'),
-                encoding="utf-8"
-        ) as data_file:
-            self.schema = PlayersDetailsSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('available_players/22831.json') as data_file:
+            self.data = PlayersDetails.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)
@@ -79,12 +74,8 @@ class TestSoccerPlayers(TestCase):
 
 class TestNFLPlayersWithExceptionalMessages(TestCase):
     def setUp(self) -> None:
-        with open(
-                os.path.join(ROOT_DIRECTORY, 'tests/files/available_players/41793.json'),
-                encoding="utf-8"
-        ) as data_file:
-            self.schema = PlayersDetailsSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('available_players/41793.json') as data_file:
+            self.data = PlayersDetails.loads(data_file.read())
 
     def test_exceptional_messages(self):
         self.assertListEqual(

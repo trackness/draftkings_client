@@ -2,8 +2,7 @@ import os
 from datetime import datetime, timezone
 from unittest import TestCase
 
-from draft_kings.response.objects.contests import Contest, ContestAttributes, DraftGroup
-from draft_kings.response.schema.contests import ContestsSchema
+from draft_kings.response.objects.contests import Contest, ContestAttributes, DraftGroup, Contests
 from tests.config import ROOT_DIRECTORY
 
 
@@ -13,8 +12,7 @@ class TestUpcomingNFLContests(TestCase):
                 os.path.join(ROOT_DIRECTORY, 'tests/files/contests/nfl/2020_10_22.json'),
                 encoding="utf-8"
         ) as data_file:
-            self.schema = ContestsSchema()
-            self.data = self.schema.loads(data_file.read())
+            self.data = Contests.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)

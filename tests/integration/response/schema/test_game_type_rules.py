@@ -1,16 +1,13 @@
-import os
 from unittest import TestCase
 
 from draft_kings.response.objects.game_type_rules import SalaryCap, RosterSlot, LineupTemplate, GameTypeRules
-from draft_kings.response.schema.game_type_rules import GameTypeRulesSchema
-from tests.config import ROOT_DIRECTORY
+from tests.config import load_fixture
 
 
 class TestClassicNFLGameTypeRules(TestCase):
     def setUp(self) -> None:
-        with open(os.path.join(ROOT_DIRECTORY, 'tests/files/game_type_rules/1.json'), encoding="utf-8") as data_file:
-            self.schema = GameTypeRulesSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('game_type_rules/1.json') as data_file:
+            self.data = GameTypeRules.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)

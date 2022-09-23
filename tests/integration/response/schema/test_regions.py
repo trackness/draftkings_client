@@ -1,16 +1,13 @@
-import os
 from unittest import TestCase
 
-from draft_kings.response.objects.regions import Region
-from draft_kings.response.schema.regions import RegionsSchema
-from tests.config import ROOT_DIRECTORY
+from draft_kings.response.objects.regions import Region, Regions
+from tests.config import load_fixture
 
 
 class TestUSRegions(TestCase):
     def setUp(self) -> None:
-        with open(os.path.join(ROOT_DIRECTORY, 'tests/files/regions/us.json'), encoding="utf-8") as data_file:
-            self.schema = RegionsSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('regions/us.json') as data_file:
+            self.data = Regions.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)
@@ -32,9 +29,8 @@ class TestUSRegions(TestCase):
 
 class TestCanadianRegions(TestCase):
     def setUp(self) -> None:
-        with open(os.path.join(ROOT_DIRECTORY, 'tests/files/regions/ca.json'), encoding="utf-8") as data_file:
-            self.schema = RegionsSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('regions/ca.json') as data_file:
+            self.data = Regions.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)
@@ -56,9 +52,8 @@ class TestCanadianRegions(TestCase):
 
 class TestGBRegions(TestCase):
     def setUp(self) -> None:
-        with open(os.path.join(ROOT_DIRECTORY, 'tests/files/regions/gb.json'), encoding="utf-8") as data_file:
-            self.schema = RegionsSchema()
-            self.data = self.schema.loads(data_file.read())
+        with load_fixture('regions/gb.json') as data_file:
+            self.data = Regions.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)

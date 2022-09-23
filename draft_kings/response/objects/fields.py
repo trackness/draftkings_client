@@ -1,15 +1,15 @@
 # pylint: disable=unused-argument, no-self-use, invalid-name, protected-access
 
-from marshmallow import fields
+from marshmallow.fields import Field
 
 
-class DictField(fields.Field):
+class DictField(Field):
     """
     https://github.com/marshmallow-code/marshmallow/issues/120#issuecomment-81382070
     """
 
     def __init__(self, key_field, nested_field, *args, **kwargs):
-        fields.Field.__init__(self, *args, **kwargs)
+        Field.__init__(self, *args, **kwargs)
         self.key_field = key_field
         self.nested_field = nested_field
 
