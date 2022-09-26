@@ -7,7 +7,7 @@ from tests.config import load_fixture
 class TestUSRegions(TestCase):
     def setUp(self) -> None:
         with load_fixture('regions/us.json') as data_file:
-            self.data = Regions.loads(data_file.read())
+            self.data: Regions = Regions.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)

@@ -1,18 +1,14 @@
-import os
 from datetime import datetime, timezone
 from unittest import TestCase
 
 from draft_kings.response.objects.contests import Contest, ContestAttributes, DraftGroup, Contests
-from tests.config import ROOT_DIRECTORY
+from tests.config import load_fixture
 
 
 class TestUpcomingNFLContests(TestCase):
     def setUp(self) -> None:
-        with open(
-                os.path.join(ROOT_DIRECTORY, 'tests/files/contests/nfl/2020_10_22.json'),
-                encoding="utf-8"
-        ) as data_file:
-            self.data = Contests.loads(data_file.read())
+        with load_fixture('contests/nfl/2020_10_22.json') as data_file:
+            self.data: Contests = Contests.loads(data_file.read())
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)
