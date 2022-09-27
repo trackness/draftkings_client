@@ -1,10 +1,8 @@
-from typing import Callable, Optional
-
-from draft_kings.data import Sport
 from draft_kings.output.draft_group import ContestDetails, StartTimeDetails, LeagueDetails, GameDetails, \
     DraftGroupDetails
 from draft_kings.response.draft_group import ContestType as ResponseContestType, League as ResponseLeague, \
     Game as ResponseGame, DraftGroup as ResponseDraftGroup
+from draft_kings.transformers.sports import transform_sport_id
 
 
 def transform_contest(contest_type: ResponseContestType) -> ContestDetails:
@@ -41,16 +39,12 @@ def transform_game(response_game: ResponseGame) -> GameDetails:
 
 
 class DraftGroupDetailsTransformer:
-    def __init__(self, contest_transformer: Callable[[ResponseContestType], ContestDetails],
-                 game_transformer: Callable[[ResponseGame], GameDetails],
-                 league_transformer: Callable[[ResponseLeague], LeagueDetails],
-                 sport_id_transformer: Callable[[Optional[int]], Optional[Sport]],
-                 start_time_details_transformer: Callable[[ResponseDraftGroup], StartTimeDetails]) -> None:
-        self.contest_transformer = contest_transformer
-        self.game_transformer = game_transformer
-        self.league_transformer = league_transformer
-        self.sport_id_transformer = sport_id_transformer
-        self.start_time_details_transformer = start_time_details_transformer
+    def __init__(self) -> None:
+        self.contest_transformer = transform_contest
+        self.game_transformer = transform_game
+        self.league_transformer = transform_league
+        self.sport_id_transformer = transform_sport_id
+        self.start_time_details_transformer = transform_draft_group_start_time_details
 
     def transform(self, draft_group: ResponseDraftGroup) -> DraftGroupDetails:
         return DraftGroupDetails(

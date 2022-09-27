@@ -53,11 +53,11 @@ class TestUpcomingNFLContests(TestCase):
         self.assertEqual(
             DraftGroup(
                 draft_group_id=41643,
-                draft_group_series_id=2,
+                series_id=2,
                 contest_type_id=21,
                 game_count=11,
                 sport="NFL",
-                start_date=datetime(year=2020, month=11, day=22, hour=18, minute=0, second=0, microsecond=0,
+                starts_at=datetime(year=2020, month=11, day=22, hour=18, minute=0, second=0, microsecond=0,
                                     tzinfo=timezone.utc)
             ),
             self.data.draft_groups[0]

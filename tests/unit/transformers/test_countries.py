@@ -45,7 +45,7 @@ class TestCountryTransformer(TestCase):
 
 class TestCountriesTransformer(TestCase):
     def setUp(self) -> None:
-        self.transformer = CountriesTransformer(country_transformer=transform_country)
+        self.transformer = CountriesTransformer()
 
     def test_empty_countries(self):
         self.assertEqual(

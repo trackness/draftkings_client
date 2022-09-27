@@ -266,18 +266,18 @@ class TestDraftGroup(TestCase):
         self.assertEqual(
             DraftGroup(
                 draft_group_id=1,
-                draft_group_series_id=2,
+                series_id=2,
                 contest_type_id=3,
                 sport="jaebaebae",
-                start_date=datetime(2020, 11, 23, 7, 30, 0, 0),
+                starts_at=datetime(2020, 11, 23, 7, 30, 0, 0),
                 game_count=4
             ),
             DraftGroup(
                 draft_group_id=1,
-                draft_group_series_id=2,
+                series_id=2,
                 contest_type_id=3,
                 sport="jaebaebae",
-                start_date=datetime(2020, 11, 23, 7, 30, 0, 0),
+                starts_at=datetime(2020, 11, 23, 7, 30, 0, 0),
                 game_count=4
             )
         )
@@ -286,18 +286,18 @@ class TestDraftGroup(TestCase):
         self.assertNotEqual(
             DraftGroup(
                 draft_group_id=1,
-                draft_group_series_id=2,
+                series_id=2,
                 contest_type_id=3,
                 sport="jaebaebae",
-                start_date=datetime(2020, 11, 23, 7, 30, 0, 0),
+                starts_at=datetime(2020, 11, 23, 7, 30, 0, 0),
                 game_count=4
             ),
             MagicMock(
                 draft_group_id=1,
-                draft_group_series_id=2,
+                series_id=2,
                 contest_type_id=3,
                 sport="jaebaebae",
-                start_date=datetime(2020, 11, 23, 7, 30, 0, 0),
+                starts_at=datetime(2020, 11, 23, 7, 30, 0, 0),
                 game_count=4
             )
         )
@@ -306,18 +306,18 @@ class TestDraftGroup(TestCase):
         self.assertNotEqual(
             DraftGroup(
                 draft_group_id=1,
-                draft_group_series_id=2,
+                series_id=2,
                 contest_type_id=3,
                 sport="jaebaebae",
-                start_date=datetime(2020, 11, 23, 7, 30, 0, 0),
+                starts_at=datetime(2020, 11, 23, 7, 30, 0, 0),
                 game_count=4
             ),
             DraftGroup(
                 draft_group_id=-1,
-                draft_group_series_id=-2,
+                series_id=-2,
                 contest_type_id=-3,
                 sport="not jaebaebae",
-                start_date=datetime(2019, 10, 22, 6, 29, 0, 0),
+                starts_at=datetime(2019, 10, 22, 6, 29, 0, 0),
                 game_count=-4
             )
         )
@@ -343,10 +343,10 @@ class TestContests(TestCase):
                 draft_groups=[
                     DraftGroup(
                         draft_group_id=1,
-                        draft_group_series_id=2,
+                        series_id=2,
                         contest_type_id=3,
                         sport="jaebaebae",
-                        start_date=datetime(2020, 11, 23, 7, 30, 0, 0),
+                        starts_at=datetime(2020, 11, 23, 7, 30, 0, 0),
                         game_count=4
                     ),
                 ]

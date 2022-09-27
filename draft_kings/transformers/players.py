@@ -6,6 +6,7 @@ from draft_kings.output.players import TeamSeriesDetails, PlayersDetails, DraftD
 from draft_kings.response.players import TeamSeries as ResponsePlayerTeamSeries, PlayersDetails as \
     ResponsePlayersDetails, Player as ResponsePlayerDetails, ExceptionalMessage as ResponseExceptionalMessage, \
     ExceptionalMessageType as ResponseExceptionalMessageType
+from draft_kings.utilities import from_unix_milliseconds_to_datetime, translate_formatted_datetime
 
 
 def transform_exceptional_message_type(
@@ -106,10 +107,14 @@ class PlayerDetailsTransformer:
 
 
 class PlayersDetailsTransformer:
-    def __init__(self, team_series_transformer: TeamSeriesTransformer,
-                 player_details_transformer: PlayerDetailsTransformer):
-        self.team_series_transformer = team_series_transformer
-        self.player_details_transformer = player_details_transformer
+    def __init__(self):
+        self.team_series_transformer = TeamSeriesTransformer(translate_formatted_datetime)
+        self.player_details_transformer = PlayerDetailsTransformer(
+                DraftDetailsTransformer(from_unix_milliseconds_to_datetime),
+                transform_player_team_series_details,
+                transform_player_position,
+                ExceptionalMessageTransformer(transform_exceptional_message_type)
+            )
 
     def transform(self, players_details_response: ResponsePlayersDetails) -> PlayersDetails:
         return PlayersDetails(

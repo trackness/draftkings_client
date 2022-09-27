@@ -25,10 +25,10 @@ class TestDraftGroupTransformer(TestCase):
             ).transform(
                 ResponseDraftGroup(
                     draft_group_id=1,
-                    draft_group_series_id=2,
+                    series_id=2,
                     contest_type_id=3,
                     sport="NFL",
-                    start_date=datetime(2020, 11, 23, 5, 30, 0, 0),
+                    starts_at=datetime(2020, 11, 23, 5, 30, 0, 0),
                     game_count=4
                 )
             )
@@ -49,10 +49,10 @@ class TestDraftGroupTransformer(TestCase):
             ).transform(
                 ResponseDraftGroup(
                     draft_group_id=1,
-                    draft_group_series_id=2,
+                    series_id=2,
                     contest_type_id=3,
                     sport="NFL",
-                    start_date=datetime(2020, 11, 23, 5, 30, 0, 0),
+                    starts_at=datetime(2020, 11, 23, 5, 30, 0, 0),
                     game_count=4
                 )
             )

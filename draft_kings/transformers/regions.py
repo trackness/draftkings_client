@@ -1,5 +1,3 @@
-from typing import Callable
-
 from draft_kings.output.regions import RegionDetails, RegionsDetails
 from draft_kings.response.regions import Region as ResponseRegion, Regions as ResponseRegions
 
@@ -14,8 +12,8 @@ def transform_region(response_region: ResponseRegion) -> RegionDetails:
 
 
 class RegionsTransformer:
-    def __init__(self, region_transformer: Callable[[ResponseRegion], RegionDetails]) -> None:
-        self.region_transformer = region_transformer
+    def __init__(self) -> None:
+        self.region_transformer = transform_region
 
     def transform(self, response_regions: ResponseRegions) -> RegionsDetails:
         return RegionsDetails(

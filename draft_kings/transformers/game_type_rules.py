@@ -1,9 +1,7 @@
-from typing import Callable
-
-from draft_kings.response.game_type_rules import SalaryCap as ResponseSalaryCap, RosterSlot as \
-    ResponseRosterSlot, LineupTemplate as ResponseLineupTemplate, GameTypeRules as ResponseGameTypeRules
 from draft_kings.output.game_type_rules import SalaryCapDetails, RosterSlotDetails, LineupTemplateDetails, \
     GameTypeRulesDetails
+from draft_kings.response.game_type_rules import SalaryCap as ResponseSalaryCap, RosterSlot as \
+    ResponseRosterSlot, LineupTemplate as ResponseLineupTemplate, GameTypeRules as ResponseGameTypeRules
 
 
 def transform_salary_cap(salary_cap: ResponseSalaryCap) -> SalaryCapDetails:
@@ -23,8 +21,8 @@ def transform_roster_slot(roster_slot: ResponseRosterSlot) -> RosterSlotDetails:
 
 
 class LineupTemplateTransformer:
-    def __init__(self, roster_slot_transformer: Callable[[ResponseRosterSlot], RosterSlotDetails]):
-        self.roster_slot_transformer = roster_slot_transformer
+    def __init__(self):
+        self.roster_slot_transformer = transform_roster_slot
 
     def transform(self, lineup_template: ResponseLineupTemplate) -> LineupTemplateDetails:
         return LineupTemplateDetails(
@@ -34,10 +32,9 @@ class LineupTemplateTransformer:
 
 
 class GameTypeRulesTransformer:
-    def __init__(self, salary_cap_transformer: Callable[[ResponseSalaryCap], SalaryCapDetails],
-                 lineup_template_transformer: LineupTemplateTransformer):
-        self.salary_cap__transformer = salary_cap_transformer
-        self.lineup_template_transformer = lineup_template_transformer
+    def __init__(self):
+        self.salary_cap__transformer = transform_salary_cap
+        self.lineup_template_transformer = LineupTemplateTransformer()
 
     def transform(self, game_type_rules: ResponseGameTypeRules) -> GameTypeRulesDetails:
         return GameTypeRulesDetails(

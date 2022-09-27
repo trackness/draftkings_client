@@ -1,30 +1,32 @@
 from datetime import datetime
-from typing import Callable, Optional
+from typing import Callable
 
 from draft_kings.data import Sport
 from draft_kings.output.contests import DraftGroupDetails, EntriesDetails, ContestDetails, ContestsDetails
 from draft_kings.response.contests import Contests as ResponseContests, DraftGroup as ResponseDraftGroup, \
     Contest as ResponseContest
+from draft_kings.transformers.sports import transform_sport_id, transform_sport_abbreviation
+from draft_kings.utilities import translate_formatted_datetime
 
 
 class DraftGroupTransformer:
-    def __init__(self, sport_abbreviation_transformer: Callable[[Optional[str]], Optional[Sport]]):
+    def __init__(self, sport_abbreviation_transformer: Callable[[str | None], Sport | None]):
         self.sport_abbreviation_transformer = sport_abbreviation_transformer
 
     def transform(self, draft_group_response: ResponseDraftGroup) -> DraftGroupDetails:
         return DraftGroupDetails(
             draft_group_id=draft_group_response.draft_group_id,
-            series_id=draft_group_response.draft_group_series_id,
+            series_id=draft_group_response.series_id,
             contest_type_id=draft_group_response.contest_type_id,
             sport=self.sport_abbreviation_transformer(draft_group_response.sport),
-            starts_at=draft_group_response.start_date,
+            starts_at=draft_group_response.starts_at,
             games_count=draft_group_response.game_count
         )
 
 
 class ContestTransformer:
-    def __init__(self, formatted_datetime_transformer: Callable[[Optional[str]], Optional[datetime]],
-                 sport_id_transformer: Callable[[Optional[int]], Optional[Sport]]):
+    def __init__(self, formatted_datetime_transformer: Callable[[str | None], datetime | None],
+                 sport_id_transformer: Callable[[int | None], Sport | None]):
         self.formatted_datetime_transformer = formatted_datetime_transformer
         self.sport_id_transformer = sport_id_transformer
 
@@ -52,10 +54,9 @@ class ContestTransformer:
 
 
 class ContestsDetailsTransformer:
-    def __init__(self, contest_transformer: ContestTransformer,
-                 draft_group_transformer: DraftGroupTransformer) -> None:
-        self.contest_transformer = contest_transformer
-        self.draft_group_transformer = draft_group_transformer
+    def __init__(self) -> None:
+        self.contest_transformer = ContestTransformer(translate_formatted_datetime, transform_sport_id)
+        self.draft_group_transformer = DraftGroupTransformer(transform_sport_abbreviation)
 
     def transform(self, response: ResponseContests) -> ContestsDetails:
         return ContestsDetails(

@@ -11,16 +11,6 @@ from draft_kings.response.smore import Smore
 
 
 @dataclass(frozen=True)
-class DraftGroupDetails(Smore):
-    contest_type_id: int | None = field(Int(data_key="player_id"))
-    draft_group_id: int | None = field(Int(allow_none=True, required=True))
-    games_count: int | None = field(Int(allow_none=True, required=True))
-    series_id: int | None = field(Int(allow_none=True, required=True))
-    sport: Sport | None = field(EnumField(Sport, allow_none=True, required=True, by_value=True))
-    starts_at: datetime | None = field(CustomAwareDateTime(allow_none=True, required=True))
-
-
-@dataclass(frozen=True)
 class EntriesDetails(Smore):
     fee: float | None = field(Number(allow_none=True, required=True))
     maximum: int | None = field(Int(allow_none=True, required=True))
@@ -42,6 +32,16 @@ class ContestDetails(Smore):
     payout: float | None = field(Number(allow_none=True, required=True))
     sport: Sport | None = field(EnumField(Sport, by_value=True, allow_none=True, required=True))
     starts_at: datetime | None = field(CustomDateTime(allow_none=True, required=True))
+
+
+@dataclass(frozen=True)
+class DraftGroupDetails(Smore):
+    contest_type_id: int | None = field(Int(allow_none=True, required=True))
+    draft_group_id: int | None = field(Int(allow_none=True, required=True))
+    games_count: int | None = field(Int(allow_none=True, required=True))
+    series_id: int | None = field(Int(allow_none=True, required=True))
+    sport: Sport | None = field(EnumField(Sport, allow_none=True, required=True, by_value=True))
+    starts_at: datetime | None = field(CustomAwareDateTime(allow_none=True, required=True))
 
 
 @dataclass(frozen=True)

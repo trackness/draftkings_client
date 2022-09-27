@@ -8,6 +8,7 @@ from draft_kings.response.draftables import Player as ResponsePlayer, PlayerComp
     ResponsePlayerCompetitionDetails, CompetitionTeam as ResponseCompetitionTeam, CompetitionWeather as \
     ResponseCompetitionWeather, Competition as ResponseCompetition, Draftables as ResponseDraftables, \
     DraftAlert as ResponseDraftAlert
+from draft_kings.transformers.sports import transform_sport_abbreviation
 
 
 def transform_player_name_details(player: ResponsePlayer) -> PlayerNameDetails:
@@ -133,9 +134,19 @@ class CompetitionTransformer:
 
 
 class DraftablesTransformer:
-    def __init__(self, competition_transformer: CompetitionTransformer, player_transformer: PlayerTransformer) -> None:
-        self.competition_transformer = competition_transformer
-        self.player_transformer = player_transformer
+    def __init__(self) -> None:
+        self.competition_transformer = CompetitionTransformer(
+                transform_competition_team_details,
+                transform_competition_weather_details,
+                transform_sport_abbreviation,
+            )
+        self.player_transformer = PlayerTransformer(
+                transform_player_name_details,
+                transform_player_image_details,
+                transform_player_competition_details,
+                transform_player_team_details,
+                transform_draft_alert,
+            )
 
     def transform(self, response_draftables: ResponseDraftables) -> DraftablesDetails:
         return DraftablesDetails(

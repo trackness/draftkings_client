@@ -33,12 +33,12 @@ class Contest(Smore):
 
 @dataclass(frozen=True)
 class DraftGroup(Smore):
-    draft_group_id: int | None = field(Int(data_key="DraftGroupId", missing=None))
-    draft_group_series_id: int | None = field(Int(data_key="DraftGroupSeriesId", missing=None))
     contest_type_id: int | None = field(Int(data_key="ContestTypeId", missing=None))
+    draft_group_id: int | None = field(Int(data_key="DraftGroupId", missing=None))
     game_count: int | None = field(Int(data_key="GameCount", missing=None))
+    series_id: int | None = field(Int(data_key="DraftGroupSeriesId", missing=None))
     sport: str | None = field(Str(data_key="Sport", missing=None))
-    start_date: datetime | None = field(AwareDateTime(data_key="StartDate", missing=None))
+    starts_at: datetime | None = field(AwareDateTime(data_key="StartDate", missing=None))
 
 
 @dataclass(frozen=True)
