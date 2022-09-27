@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 
 from desert import field
-from marshmallow.fields import Float, Str, Int, Bool
+from marshmallow.fields import Float, Str, Int, Bool, List, Nested
 
+from draft_kings.fields import DictField
 from draft_kings.response.smore import Smore
 
 
@@ -23,7 +24,7 @@ class ExceptionalMessageType(Smore):
 @dataclass(frozen=True)
 class ExceptionalMessage(Smore):
     message: str | None = field(Str(data_key="Message", missing=None))
-    message_type: ExceptionalMessageType | None = field(Smore.nest(ExceptionalMessageType, data_key="MessageType", missing=None))
+    message_type: ExceptionalMessageType | None = field(Nested(ExceptionalMessageType.schema(), data_key="MessageType", missing=None))
     priority: int | None = field(Int(data_key="Priority", missing=None))
 
 
@@ -31,7 +32,7 @@ class ExceptionalMessage(Smore):
 class Player(Smore):
     away_team_id: int | None = field(Int(data_key="atid", missing=None))
     draft_group_start_time: int | None = field(Int(data_key="dgst", missing=None))
-    exceptional_messages: list[ExceptionalMessage] = field(Smore.list_nest(ExceptionalMessage, data_key="ExceptionalMessages", missing=None))
+    exceptional_messages: list[ExceptionalMessage] = field(List(Nested(ExceptionalMessage.schema()), data_key="ExceptionalMessages", missing=None))
     first_name: str | None = field(Str(data_key="fn", missing=None))
     home_team_id: int | None = field(Int(data_key="htid", missing=None))
     is_disabled_from_drafting: bool | None = field(Bool(data_key="IsDisabledFromDrafting", missing=None))
@@ -49,5 +50,9 @@ class Player(Smore):
 
 @dataclass(frozen=True)
 class PlayersDetails(Smore):
-    players: list[Player] = field(Smore.list_nest(Player, data_key="playerList", missing=[]))
-    team_series: dict[str, TeamSeries] = field(Smore.dict_nest(TeamSeries, data_key="teamList", missing=None))
+    players: list[Player] = field(List(Nested(Player.schema()), data_key="playerList", missing=[]))
+    team_series: dict[str, TeamSeries] = field(DictField(
+        Str(required=True),
+        Nested(TeamSeries.schema(), required=True),
+        data_key="teamList", missing=None)
+    )

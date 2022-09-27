@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from desert import field
-from marshmallow.fields import Float, Str, Int, Bool, AwareDateTime
+from marshmallow.fields import Float, Str, Int, Bool, AwareDateTime, Nested, List
 
 from draft_kings.response.smore import Smore
 
@@ -24,10 +24,10 @@ class DraftAlert(Smore):
 
 @dataclass(frozen=True)
 class Player(Smore):
-    competition: PlayerCompetitionDetails | None = field(Smore.nest(PlayerCompetitionDetails, data_key="competition", missing=None))
+    competition: PlayerCompetitionDetails | None = field(Nested(PlayerCompetitionDetails.schema(), data_key="competition", missing=None))
     display_name: str | None = field(Str(data_key="displayName", missing=None))
     draftable_id: int | None = field(Int(data_key="draftableId", missing=None))
-    draft_alerts: list[DraftAlert] = field(Smore.list_nest(DraftAlert, data_key="draftAlerts", missing=[]))
+    draft_alerts: list[DraftAlert] = field(List(Nested(DraftAlert.schema()), data_key="draftAlerts", missing=[]))
     first_name: str | None = field(Str(data_key="firstName", missing=None))
     is_disabled: bool | None = field(Bool(data_key="isDisabled", missing=None))
     is_swappable: bool | None = field(Bool(data_key="isSwappable", missing=None))
@@ -62,19 +62,19 @@ class CompetitionWeather(Smore):
 class Competition(Smore):
     are_depth_charts_available: bool | None = field(Bool(data_key="depthChartsAvailable", missing=None))
     are_starting_lineups_available: bool | None = field(Bool(data_key="startingLineupsAvailable", missing=None))
-    away_team: CompetitionTeam | None = field(Smore.nest(CompetitionTeam, data_key="awayTeam", missing=None))
+    away_team: CompetitionTeam | None = field(Nested(CompetitionTeam.schema(), data_key="awayTeam", missing=None))
     competition_id: int | None = field(Int(data_key="competitionId", missing=None))
     competition_state: str | None = field(Str(data_key="competitionState", missing=None))
-    home_team: CompetitionTeam | None = field(Smore.nest(CompetitionTeam, data_key="homeTeam", missing=None))
+    home_team: CompetitionTeam | None = field(Nested(CompetitionTeam.schema(), data_key="homeTeam", missing=None))
     name: str | None = field(Str(data_key="name", missing=None))
     sport: str | None = field(Str(data_key="sport", missing=None))
     sport_id: int | None = field(Int(data_key="sportId", missing=None))
     start_time: datetime | None = field(AwareDateTime(data_key="startTime", missing=None))
     venue: str | None = field(Str(data_key="venue", missing=None))
-    weather: CompetitionWeather | None = field(Smore.nest(CompetitionWeather, data_key="weather", missing=None))
+    weather: CompetitionWeather | None = field(Nested(CompetitionWeather.schema(), data_key="weather", missing=None))
 
 
 @dataclass(frozen=True)
 class Draftables(Smore):
-    competitions: list[Competition] = field(Smore.list_nest(Competition, data_key="competitions", missing=[]))
-    draftables: list[Player] = field(Smore.list_nest(Player, data_key="draftables", missing=[]))
+    competitions: list[Competition] = field(List(Nested(Competition.schema()), data_key="competitions", missing=[]))
+    draftables: list[Player] = field(List(Nested(Player.schema()), data_key="draftables", missing=[]))

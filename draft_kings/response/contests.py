@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from desert import field
-from marshmallow.fields import Float, Str, Int, Bool, AwareDateTime
+from marshmallow.fields import Float, Str, Int, Bool, AwareDateTime, Nested, List
 
 from draft_kings.response.smore import Smore
 
@@ -18,7 +18,7 @@ class ContestAttributes(Smore):
 
 @dataclass(frozen=True)
 class Contest(Smore):
-    attributes: ContestAttributes | None = field(Smore.nest(ContestAttributes, data_key="attr", missing=None))
+    attributes: ContestAttributes | None = field(Nested(ContestAttributes.schema(), data_key="attr", missing=None))
     contest_id: int | None = field(Int(data_key="id", missing=None))
     draft_group_id: int | None = field(Int(data_key="dg", missing=None))
     entry_fee: float | None = field(Float(data_key="a", missing=None))
@@ -43,7 +43,7 @@ class DraftGroup(Smore):
 
 @dataclass(frozen=True)
 class Contests(Smore):
-    contests: list[Contest] = field(Smore.list_nest(Contest, data_key="Contests", missing=[]))
-    draft_groups: list[DraftGroup] = field(Smore.list_nest(DraftGroup, data_key="DraftGroups", missing=[]))
+    contests: list[Contest] = field(List(Nested(Contest.schema()), data_key="Contests", missing=[]))
+    draft_groups: list[DraftGroup] = field(List(Nested(DraftGroup.schema()), data_key="DraftGroups", missing=[]))
 
 

@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 from desert import field
-from marshmallow.fields import Str, List
+from marshmallow.fields import Str, List, Nested
 
 from draft_kings.response.smore import Smore
 
@@ -17,5 +17,5 @@ class Region(Smore):
 
 @dataclass(frozen=True)
 class Regions(Smore):
-    regions: list[Region] = field(List(Smore.nest(Region), data_key="regions", missing=[]))
+    regions: list[Region] = field(List(Nested(Region.schema()), data_key="regions", missing=[]))
 

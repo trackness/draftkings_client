@@ -34,13 +34,11 @@ class Game(Smore):
 
 @dataclass(frozen=True)
 class DraftGroup(Smore):
-    contest_type: ContestType = field(Smore.nest(ContestType, data_key="contestType", required=True))
+    contest_type: ContestType = field(Nested(ContestType.schema(), data_key="contestType", required=True))
     draft_group_id: int | None = field(Int(data_key="draftGroupId", missing=None))
     draft_group_state: str | None = field(Str(data_key="draftGroupState", missing=None))
-    # TODO : still haven't got these two right with the Smore mixin methods:
-    games: list[Game] = field(List(Nested(Smore._schema(Game), required=True), data_key="games", missing=[]))
-    leagues: list[League] = field(List(Nested(Smore._schema(League), required=True), data_key="leagues", missing=[]))
-    #
+    games: list[Game] = field(List(Nested(Game.schema(), required=True), data_key="games", missing=[]))
+    leagues: list[League] = field(List(Nested(League.schema(), required=True), data_key="leagues", missing=[]))
     max_start_time: datetime | None = field(AwareDateTime(data_key="maxStartTime", missing=None))
     min_start_time: datetime | None = field(AwareDateTime(data_key="minStartTime", missing=None))
     sport_id: int | None = field(Int(data_key="sportId", missing=None))
@@ -49,4 +47,4 @@ class DraftGroup(Smore):
 
 @dataclass(frozen=True)
 class DraftGroupResponse(Smore):
-    draft_group: DraftGroup = field(Smore.nest(DraftGroup, data_key="draftGroup", required=True))
+    draft_group: DraftGroup = field(Nested(DraftGroup.schema(), data_key="draftGroup", required=True))

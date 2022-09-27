@@ -5,31 +5,32 @@ from requests import Response
 
 from draft_kings.data import Sport
 from draft_kings.http_client import HTTPClient
-from draft_kings.output.objects.contests import ContestsDetails
-from draft_kings.output.objects.countries import CountriesDetails
-from draft_kings.output.objects.draft_group import DraftGroupDetails
-from draft_kings.output.objects.draftables import DraftablesDetails
-from draft_kings.output.objects.game_type_rules import GameTypeRulesDetails
-from draft_kings.output.objects.players import PlayersDetails
-from draft_kings.output.objects.regions import RegionsDetails
-from draft_kings.output.transformers.contests import ContestsDetailsTransformer, DraftGroupTransformer, \
+from draft_kings.output.contests import ContestsDetails
+from draft_kings.output.countries import CountriesDetails
+from draft_kings.output.draft_group import DraftGroupDetails
+from draft_kings.output.draftables import DraftablesDetails
+from draft_kings.output.game_type_rules import GameTypeRulesDetails
+from draft_kings.output.players import PlayersDetails
+from draft_kings.output.regions import RegionsDetails
+from draft_kings.transformers.contests import ContestsDetailsTransformer, DraftGroupTransformer, \
     ContestTransformer
-from draft_kings.output.transformers.countries import CountriesTransformer, transform_country
-from draft_kings.output.transformers.draft_group import transform_contest as transform_draft_group_contest, \
+from draft_kings.transformers.countries import CountriesTransformer, transform_country
+from draft_kings.transformers.draft_group import transform_contest as transform_draft_group_contest, \
     transform_draft_group_start_time_details, transform_game, transform_league, DraftGroupDetailsTransformer
-from draft_kings.output.transformers.draftables import transform_competition_team_details, \
+from draft_kings.transformers.draftables import transform_competition_team_details, \
     transform_competition_weather_details, transform_player_competition_details, transform_player_image_details, \
     transform_player_name_details, transform_player_team_details, PlayerTransformer, CompetitionTransformer, \
     DraftablesTransformer, transform_draft_alert
-from draft_kings.output.transformers.game_type_rules import transform_roster_slot, transform_salary_cap, \
+from draft_kings.transformers.game_type_rules import transform_roster_slot, transform_salary_cap, \
     LineupTemplateTransformer, GameTypeRulesTransformer
-from draft_kings.output.transformers.players import TeamSeriesTransformer, DraftDetailsTransformer, \
+from draft_kings.transformers.players import TeamSeriesTransformer, DraftDetailsTransformer, \
     transform_player_position, transform_player_team_series_details, PlayerDetailsTransformer, \
     PlayersDetailsTransformer, ExceptionalMessageTransformer, transform_exceptional_message_type
-from draft_kings.output.transformers.regions import RegionsTransformer, transform_region
-from draft_kings.output.transformers.sports import transform_sport_id, transform_sport_abbreviation
+from draft_kings.transformers.regions import RegionsTransformer, transform_region
+from draft_kings.transformers.sports import transform_sport_id, transform_sport_abbreviation
 from draft_kings.response.contests import Contests as ResponseContests
 from draft_kings.response.countries import Countries as ResponseCountries
+from draft_kings.response.draft_group import DraftGroupResponse
 from draft_kings.response.draftables import Draftables as ResponseDraftables
 from draft_kings.response.game_type_rules import GameTypeRules as ResponseGameTypeRules
 from draft_kings.response.players import PlayersDetails as ResponsePlayersDetails
@@ -108,7 +109,7 @@ class Client:
 
     def draft_group_details(self, draft_group_id: int) -> DraftGroupDetails:
         response: Response = self.http_client.draft_group_details(draft_group_id=draft_group_id)
-        deserialized_response = ResponseDraftables.loads(response.text)
+        deserialized_response = DraftGroupResponse.loads(response.text)
         return self.draft_group_details_transformer.transform(deserialized_response.draft_group)
 
     def countries(self) -> CountriesDetails:
