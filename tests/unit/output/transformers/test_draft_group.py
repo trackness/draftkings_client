@@ -4,7 +4,7 @@ from unittest import TestCase
 from draft_kings.output.objects.draft_group import ContestDetails, LeagueDetails, StartTimeDetails, GameDetails
 from draft_kings.output.transformers.draft_group import transform_contest, transform_league, \
     transform_draft_group_start_time_details, transform_game
-from draft_kings.response.objects.draft_group import ContestType, League, DraftGroup, Game
+from draft_kings.response.draft_group import ContestType, League, DraftGroup, Game
 
 
 class TestTransformContest(TestCase):

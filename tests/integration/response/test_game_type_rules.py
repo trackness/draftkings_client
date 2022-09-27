@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from draft_kings.response.objects.game_type_rules import SalaryCap, RosterSlot, LineupTemplate, GameTypeRules
+from draft_kings.response.game_type_rules import SalaryCap, RosterSlot, LineupTemplate, GameTypeRules
 from tests.config import load_fixture
 
 

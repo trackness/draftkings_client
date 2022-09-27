@@ -1,6 +1,6 @@
 from typing import Callable
 
-from draft_kings.response.objects.game_type_rules import SalaryCap as ResponseSalaryCap, RosterSlot as \
+from draft_kings.response.game_type_rules import SalaryCap as ResponseSalaryCap, RosterSlot as \
     ResponseRosterSlot, LineupTemplate as ResponseLineupTemplate, GameTypeRules as ResponseGameTypeRules
 from draft_kings.output.objects.game_type_rules import SalaryCapDetails, RosterSlotDetails, LineupTemplateDetails, \
     GameTypeRulesDetails

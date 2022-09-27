@@ -4,7 +4,7 @@ from datetime import datetime
 from desert import field
 from marshmallow.fields import Float, Str, Int, Bool, AwareDateTime
 
-from draft_kings.response.objects.smore import Smore
+from draft_kings.response.smore import Smore
 
 
 @dataclass(frozen=True)
@@ -16,10 +16,10 @@ class PlayerCompetitionDetails(Smore):
 
 @dataclass(frozen=True)
 class DraftAlert(Smore):
-    alert_type: str | None = field(Str(data_key="alert_type", missing=None))
+    alert_type: str | None = field(Str(data_key="alertType", missing=None))
     message: str | None = field(Str(data_key="message", missing=None))
     priority: int | None = field(Int(data_key="priority", missing=None))
-    updated_date: datetime | None = field(AwareDateTime(data_key="updated_date", missing=None))
+    updated_date: datetime | None = field(AwareDateTime(data_key="updatedDate", missing=None))
 
 
 @dataclass(frozen=True)
@@ -76,5 +76,5 @@ class Competition(Smore):
 
 @dataclass(frozen=True)
 class Draftables(Smore):
-    competitions: list[Competition] = field(Smore.list_nest(Competition, data_key="draftables", missing=[]))
-    draftables: list[Player] = field(Smore.list_nest(Player, data_key="competitions", missing=[]))
+    competitions: list[Competition] = field(Smore.list_nest(Competition, data_key="competitions", missing=[]))
+    draftables: list[Player] = field(Smore.list_nest(Player, data_key="draftables", missing=[]))

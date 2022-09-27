@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from draft_kings.response.objects.countries import Country, Countries
+from draft_kings.response.countries import Country, Countries
 from tests.config import load_fixture
 
 

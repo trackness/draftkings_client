@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from unittest import TestCase
 
-from draft_kings.response.objects.contests import Contest, ContestAttributes, DraftGroup, Contests
+from draft_kings.response.contests import Contest, ContestAttributes, DraftGroup, Contests
 from tests.config import load_fixture
 
 

@@ -4,7 +4,7 @@ from draft_kings.data import Sport
 from draft_kings.output.objects.draftables import PlayerNameDetails, PlayerImageDetails, PlayerCompetitionDetails, \
     PlayerTeamDetails, PlayerDetails, CompetitionTeamDetails, CompetitionWeatherDetails, CompetitionDetails, \
     DraftablesDetails, PlayerDraftAlertDetails
-from draft_kings.response.objects.draftables import Player as ResponsePlayer, PlayerCompetitionDetails as \
+from draft_kings.response.draftables import Player as ResponsePlayer, PlayerCompetitionDetails as \
     ResponsePlayerCompetitionDetails, CompetitionTeam as ResponseCompetitionTeam, CompetitionWeather as \
     ResponseCompetitionWeather, Competition as ResponseCompetition, Draftables as ResponseDraftables, \
     DraftAlert as ResponseDraftAlert

@@ -4,7 +4,7 @@ from datetime import datetime
 from desert import field
 from marshmallow.fields import Str, Int, AwareDateTime, Nested, List
 
-from draft_kings.response.objects.smore import Smore
+from draft_kings.response.smore import Smore
 
 
 @dataclass(frozen=True)
@@ -34,15 +34,17 @@ class Game(Smore):
 
 @dataclass(frozen=True)
 class DraftGroup(Smore):
-    contest_type: ContestType = field(Nested(ContestType, data_key="contest_type", required=True))
-    draft_group_id: int | None = field(Int(data_key="draft_group_id", missing=None))
-    draft_group_state: str | None = field(Str(data_key="draft_group_state", missing=None))
-    games: list[Game] = field(Smore.list_nest(Game, required=True, data_key="games", missing=[]))
-    leagues: list[League] = field(List(Nested(League, required=True), data_key="leagues", missing=[]))
-    max_start_time: datetime | None = field(AwareDateTime(data_key="max_start_time", missing=None))
-    min_start_time: datetime | None = field(AwareDateTime(data_key="min_start_time", missing=None))
-    sport_id: int | None = field(Int(data_key="sport_id", missing=None))
-    start_time_type: str | None = field(Str(data_key="start_time_type", missing=None))
+    contest_type: ContestType = field(Smore.nest(ContestType, data_key="contestType", required=True))
+    draft_group_id: int | None = field(Int(data_key="draftGroupId", missing=None))
+    draft_group_state: str | None = field(Str(data_key="draftGroupState", missing=None))
+    # TODO : still haven't got these two right with the Smore mixin methods:
+    games: list[Game] = field(List(Nested(Smore._schema(Game), required=True), data_key="games", missing=[]))
+    leagues: list[League] = field(List(Nested(Smore._schema(League), required=True), data_key="leagues", missing=[]))
+    #
+    max_start_time: datetime | None = field(AwareDateTime(data_key="maxStartTime", missing=None))
+    min_start_time: datetime | None = field(AwareDateTime(data_key="minStartTime", missing=None))
+    sport_id: int | None = field(Int(data_key="sportId", missing=None))
+    start_time_type: str | None = field(Str(data_key="startTimeType", missing=None))
 
 
 @dataclass(frozen=True)

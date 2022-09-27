@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from typing import Optional
 
 from desert import field
-from marshmallow.fields import Str, Int, Bool, List, Nested
+from marshmallow.fields import Str, Int, Bool
 
-from draft_kings.response.objects.smore import Smore
+from draft_kings.response.smore import Smore
 
 
 @dataclass(frozen=True)

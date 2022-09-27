@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from draft_kings.output.objects.countries import CountriesDetails, CountryDetails
 from draft_kings.output.transformers.countries import CountriesTransformer, transform_country
-from draft_kings.response.objects.countries import Country as ResponseCountry, Countries as ResponseCountries
+from draft_kings.response.countries import Country as ResponseCountry, Countries as ResponseCountries
 
 
 class TestCountryTransformer(TestCase):

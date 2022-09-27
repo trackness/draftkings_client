@@ -1,7 +1,7 @@
 from typing import Callable
 
 from draft_kings.output.objects.regions import RegionDetails, RegionsDetails
-from draft_kings.response.objects.regions import Region as ResponseRegion, Regions as ResponseRegions
+from draft_kings.response.regions import Region as ResponseRegion, Regions as ResponseRegions
 
 
 def transform_region(response_region: ResponseRegion) -> RegionDetails:

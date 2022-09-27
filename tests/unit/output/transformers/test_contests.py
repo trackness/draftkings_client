@@ -5,7 +5,7 @@ from unittest.mock import Mock
 from draft_kings.data import Sport
 from draft_kings.output.objects.contests import DraftGroupDetails, ContestDetails, EntriesDetails
 from draft_kings.output.transformers.contests import DraftGroupTransformer, ContestTransformer
-from draft_kings.response.objects.contests import DraftGroup as ResponseDraftGroup, Contest as ResponseContest, \
+from draft_kings.response.contests import DraftGroup as ResponseDraftGroup, Contest as ResponseContest, \
     ContestAttributes as ResponseContestAttributes
 
 

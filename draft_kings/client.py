@@ -28,12 +28,12 @@ from draft_kings.output.transformers.players import TeamSeriesTransformer, Draft
     PlayersDetailsTransformer, ExceptionalMessageTransformer, transform_exceptional_message_type
 from draft_kings.output.transformers.regions import RegionsTransformer, transform_region
 from draft_kings.output.transformers.sports import transform_sport_id, transform_sport_abbreviation
-from draft_kings.response.objects.contests import Contests as ResponseContests
-from draft_kings.response.objects.countries import Countries as ResponseCountries
-from draft_kings.response.objects.draftables import Draftables as ResponseDraftables
-from draft_kings.response.objects.game_type_rules import GameTypeRules as ResponseGameTypeRules
-from draft_kings.response.objects.players import PlayersDetails as ResponsePlayersDetails
-from draft_kings.response.objects.regions import Regions as ResponseRegions
+from draft_kings.response.contests import Contests as ResponseContests
+from draft_kings.response.countries import Countries as ResponseCountries
+from draft_kings.response.draftables import Draftables as ResponseDraftables
+from draft_kings.response.game_type_rules import GameTypeRules as ResponseGameTypeRules
+from draft_kings.response.players import PlayersDetails as ResponsePlayersDetails
+from draft_kings.response.regions import Regions as ResponseRegions
 from draft_kings.url_builder import URLBuilder
 from draft_kings.utilities import translate_formatted_datetime, from_unix_milliseconds_to_datetime
 

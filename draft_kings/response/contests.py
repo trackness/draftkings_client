@@ -4,7 +4,7 @@ from datetime import datetime
 from desert import field
 from marshmallow.fields import Float, Str, Int, Bool, AwareDateTime
 
-from draft_kings.response.objects.smore import Smore
+from draft_kings.response.smore import Smore
 
 
 @dataclass(frozen=True)

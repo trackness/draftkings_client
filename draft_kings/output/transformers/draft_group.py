@@ -3,7 +3,7 @@ from typing import Callable, Optional
 from draft_kings.data import Sport
 from draft_kings.output.objects.draft_group import ContestDetails, StartTimeDetails, LeagueDetails, GameDetails, \
     DraftGroupDetails
-from draft_kings.response.objects.draft_group import ContestType as ResponseContestType, League as ResponseLeague, \
+from draft_kings.response.draft_group import ContestType as ResponseContestType, League as ResponseLeague, \
     Game as ResponseGame, DraftGroup as ResponseDraftGroup
 
 

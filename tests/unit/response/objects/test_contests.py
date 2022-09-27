@@ -2,7 +2,7 @@ from datetime import datetime
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from draft_kings.response.objects.contests import ContestAttributes, Contest, DraftGroup, Contests
+from draft_kings.response.contests import ContestAttributes, Contest, DraftGroup, Contests
 
 
 class TestContestTypeAttributes(TestCase):

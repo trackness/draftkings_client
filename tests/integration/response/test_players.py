@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from draft_kings.response.objects.players import TeamSeries, Player, ExceptionalMessage, ExceptionalMessageType, \
+from draft_kings.response.players import TeamSeries, Player, ExceptionalMessage, ExceptionalMessageType, \
     PlayersDetails
 from tests.config import load_fixture
 
@@ -9,6 +9,8 @@ class TestSoccerPlayers(TestCase):
     def setUp(self) -> None:
         with load_fixture('available_players/22831.json') as data_file:
             self.data = PlayersDetails.loads(data_file.read())
+            print(f"\n\n### {len(self.data.players)} players loaded ###")
+            print(f"### {len(self.data.team_series)} team series loaded ###\n")
 
     def test_deserialization(self) -> None:
         self.assertIsNotNone(self.data)

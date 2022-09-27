@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from unittest import TestCase
 
-from draft_kings.response.objects.draftables import Competition, Player, PlayerCompetitionDetails, CompetitionWeather, \
+from draft_kings.response.draftables import Competition, Player, PlayerCompetitionDetails, CompetitionWeather, \
     CompetitionTeam, DraftAlert, Draftables
 from tests.config import load_fixture
 
@@ -36,6 +36,7 @@ class TestUpcomingNFLDraftables(TestCase):
                     ),
                     name="HOU @ DET",
                     sport="NFL",
+                    sport_id=1,
                     start_time=datetime(2020, 11, 26, 17, 30, 0, 0, tzinfo=timezone.utc),
                     venue="Ford Field",
                     weather=CompetitionWeather(
@@ -62,6 +63,7 @@ class TestUpcomingNFLDraftables(TestCase):
                     ),
                     name="WAS @ DAL",
                     sport="NFL",
+                    sport_id=1,
                     start_time=datetime(2020, 11, 26, 21, 30, 0, 0, tzinfo=timezone.utc),
                     venue="AT&T Stadium",
                     weather=CompetitionWeather(
@@ -88,6 +90,7 @@ class TestUpcomingNFLDraftables(TestCase):
                     ),
                     name="BAL @ PIT",
                     sport="NFL",
+                    sport_id=1,
                     start_time=datetime(2020, 11, 27, 1, 20, 0, 0, tzinfo=timezone.utc),
                     venue="Heinz Field",
                     weather=CompetitionWeather(
@@ -203,6 +206,7 @@ class TestHistoricalDraftablesForDraftGroup11513(TestCase):
                     ),
                     name="TOR @ CLE",
                     sport="NBA",
+                    sport_id=0,
                     start_time=datetime(2016, 11, 16, 0, 0, 0, 0, tzinfo=timezone.utc),
                     venue="Quicken Loans Arena",
                     weather=CompetitionWeather(
@@ -229,6 +233,7 @@ class TestHistoricalDraftablesForDraftGroup11513(TestCase):
                     ),
                     name="ATL @ MIA",
                     sport="NBA",
+                    sport_id=0,
                     start_time=datetime(2016, 11, 16, 0, 30, 0, 0, tzinfo=timezone.utc),
                     venue="AmericanAirlines Arena",
                     weather=None
@@ -252,6 +257,7 @@ class TestHistoricalDraftablesForDraftGroup11513(TestCase):
                     ),
                     name="CHA @ MIN",
                     sport="NBA",
+                    sport_id=0,
                     start_time=datetime(2016, 11, 16, 1, 0, 0, 0, tzinfo=timezone.utc),
                     venue="Target Center",
                     weather=None
@@ -275,6 +281,7 @@ class TestHistoricalDraftablesForDraftGroup11513(TestCase):
                     ),
                     name="CHI @ POR",
                     sport="NBA",
+                    sport_id=0,
                     start_time=datetime(2016, 11, 16, 3, 0, 0, 0, tzinfo=timezone.utc),
                     venue="Moda Center at the Rose Quarter",
                     weather=None
@@ -298,6 +305,7 @@ class TestHistoricalDraftablesForDraftGroup11513(TestCase):
                     ),
                     name="BKN @ LAL",
                     sport="NBA",
+                    sport_id=0,
                     start_time=datetime(2016, 11, 16, 3, 30, 0, 0, tzinfo=timezone.utc),
                     venue="Staples Center",
                     weather=None

@@ -4,7 +4,7 @@ from desert import schema
 from marshmallow import EXCLUDE, Schema
 from marshmallow.fields import Nested, List, Str
 
-from draft_kings.response.objects.fields import DictField
+from draft_kings.response.fields import DictField
 
 
 class Smore:

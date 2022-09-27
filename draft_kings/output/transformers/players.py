@@ -3,7 +3,7 @@ from typing import Callable, Optional
 
 from draft_kings.output.objects.players import TeamSeriesDetails, PlayersDetails, DraftDetails, \
     PlayerTeamSeriesDetails, PositionDetails, PlayerDetails, ExceptionalMessageDetails, ExceptionalMessageTypeDetails
-from draft_kings.response.objects.players import TeamSeries as ResponsePlayerTeamSeries, PlayersDetails as \
+from draft_kings.response.players import TeamSeries as ResponsePlayerTeamSeries, PlayersDetails as \
     ResponsePlayersDetails, Player as ResponsePlayerDetails, ExceptionalMessage as ResponseExceptionalMessage, \
     ExceptionalMessageType as ResponseExceptionalMessageType
 
