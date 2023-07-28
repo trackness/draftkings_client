@@ -1,5 +1,5 @@
-![GitHub Actions](https://github.com/jaebradley/draftkings_client/workflows/DraftKings%20Client/badge.svg?branch=v3)
-![codecov](https://codecov.io/gh/jaebradley/draftkings_client/branch/v3/graph/badge.svg)
+![GitHub Actions](https://github.com/trackness/draftkings_client/workflows/DraftKings%20Client/badge.svg?branch=v3)
+![codecov](https://codecov.io/gh/trackness/draftkings_client/branch/v3/graph/badge.svg)
 ![PyPI](https://img.shields.io/pypi/v/draft_kings.svg)
 
 # DraftKings Python Client
@@ -19,4 +19,4 @@ methods will work consistently.
 ## Documentation
 
 For documentation about package installation as well as the client's API, please see 
-[the documentation site](https://jaebradley.github.io/draftkings_client).
+[the documentation site](https://trackness.github.io/draftkings_client).
