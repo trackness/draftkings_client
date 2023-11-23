@@ -1,29 +1,31 @@
-BASE_URL = 'https://www.draftkings.com'
-API_BASE_URL = 'https://api.draftkings.com'
-
-
 class URLBuilder:
-    def __init__(self, base_path: str = BASE_URL, api_base_path: str = API_BASE_URL) -> None:
-        self.base_path = base_path
-        self.api_base_path = api_base_path
+    BASE_URL = 'https://www.draftkings.com'
+    API_BASE_URL = 'https://api.draftkings.com'
 
-    def build_draft_group_url(self, draft_group_id: int) -> str:
-        return f"{self.api_base_path}/draftgroups/v1/{draft_group_id}"
+    @staticmethod
+    def draft_groups(draft_group_id: int) -> str:
+        return f"{URLBuilder.API_BASE_URL}/draftgroups/v1/{draft_group_id}"
 
-    def build_countries_url(self) -> str:
-        return f"{self.api_base_path}/addresses/v1/countries"
+    @staticmethod
+    def countries() -> str:
+        return f"{URLBuilder.API_BASE_URL}/addresses/v1/countries"
 
-    def build_regions_url(self, country_code: str) -> str:
-        return f"{self.api_base_path}/addresses/v1/countries/{country_code}/regions"
+    @staticmethod
+    def regions(country_code: str) -> str:
+        return f"{URLBuilder.API_BASE_URL}/addresses/v1/countries/{country_code}/regions"
 
-    def build_contests_url(self) -> str:
-        return f"{self.base_path}/lobby/getcontests"
+    @staticmethod
+    def contests() -> str:
+        return f"{URLBuilder.BASE_URL}/lobby/getcontests"
 
-    def build_available_players_url(self) -> str:
-        return f"{self.base_path}/lineup/getavailableplayers"
+    @staticmethod
+    def available_players() -> str:
+        return f"{URLBuilder.BASE_URL}/lineup/getavailableplayers"
 
-    def build_draftables_url(self, draft_group_id: int) -> str:
-        return f"{self.api_base_path}/draftgroups/v1/draftgroups/{draft_group_id}/draftables"
+    @staticmethod
+    def draftables(draft_group_id: int) -> str:
+        return f"{URLBuilder.API_BASE_URL}/draftgroups/v1/draftgroups/{draft_group_id}/draftables"
 
-    def build_game_type_rules_url(self, game_type_id: int) -> str:
-        return f"{self.api_base_path}/lineups/v1/gametypes/{game_type_id}/rules"
+    @staticmethod
+    def game_type_rules(game_type_id: int) -> str:
+        return f"{URLBuilder.API_BASE_URL}/lineups/v1/gametypes/{game_type_id}/rules"
