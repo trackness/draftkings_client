@@ -1,4 +1,3 @@
-# pylint: disable=too-many-instance-attributes
 import pprint
 
 from requests import Response
@@ -48,7 +47,6 @@ class Client:
         return GameTypeRules.model_validate_json(response.text)
 
 
-# pylint: enable=too-many-instance-attributes
 if __name__ == "__main__":
     c: Client = Client()
     pprint.pprint(c.contests(Sport.NBA).model_dump())
