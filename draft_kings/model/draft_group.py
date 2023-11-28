@@ -49,14 +49,12 @@ class DraftGroup(BaseModel):
 
     @model_validator(mode="before")
     def set_entries(cls, data: dict) -> dict:
-        if draft_group := data.get("draftGroup"):
-            # move relevant items to 'start_time_details' parent key
-            draft_group["start_time_details"] = {}
-            for k in ["maxStartTime", "minStartTime", "startTimeType"]:
-                if v := draft_group.pop(k, None):
-                    draft_group["start_time_details"][k] = v
-            return draft_group
-        return {}
+        data = data.get("draftGroup") or {}
+        data["start_time_details"] = {}
+        for k in ["maxStartTime", "minStartTime", "startTimeType"]:
+            if v := data.pop(k, None):
+                data["start_time_details"][k] = v
+        return data
 
     @field_validator("sport", mode="before")
     def check_datetime(cls, v: int | None) -> Sport | None:
