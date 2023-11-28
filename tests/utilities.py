@@ -1,6 +1,8 @@
+import os
+
 from pathlib import Path
 
-from tests.config import ROOT_DIRECTORY
+ROOT_DIRECTORY = root_path = os.path.dirname(os.path.dirname(__file__))
 
 
 def read_fixture(file: str) -> str:
